@@ -1120,6 +1120,121 @@
       width: 12px; height: 12px;
       background: var(--gold);
     }
+
+    /* ─── MOBILE HAMBURGER ─── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--charcoal);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      nav { padding: 1.25rem 2rem; }
+      nav.scrolled { padding: 0.875rem 2rem; }
+
+      #hero { grid-template-columns: 1fr; min-height: 100svh; }
+      .hero-left { padding: 8rem 2rem 4rem; }
+      .hero-right { position: relative; height: 50vw; min-height: 300px; }
+      .hero-right::before { display: none; }
+      .scroll-indicator { display: none; }
+
+      #stats { padding: 2.5rem 2rem; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(184,154,106,0.15); }
+      .stat-item { background: var(--charcoal); border-right: none; padding: 1.5rem 1rem; }
+
+      #services { padding: 5rem 2rem; }
+      .services-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+      .services-grid { grid-template-columns: 1fr 1fr; gap: 2px; }
+
+      #whitening { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+      #trust { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+      .trust-badge { bottom: -1rem; right: 1rem; padding: 1.25rem; }
+      .trust-image { aspect-ratio: 16/9; }
+      .trust-image-wrap { margin-bottom: 2rem; }
+
+      #testimonials { padding: 5rem 2rem; }
+      .testimonials-track { grid-template-columns: 1fr; gap: 1.5rem; }
+
+      #cta { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+
+      footer { padding: 3rem 2rem 2rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1.1rem 1.25rem; }
+      nav.scrolled { padding: 0.75rem 1.25rem; }
+
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(250, 250, 247, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+        z-index: 99;
+      }
+
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.2rem; letter-spacing: 0.15em; opacity: 0.85; }
+      .nav-cta { padding: 0.875rem 2rem; }
+
+      .nav-hamburger { display: flex; z-index: 101; position: relative; }
+
+      .hero-left { padding: 7rem 1.25rem 3rem; }
+      .hero-h1 { font-size: clamp(2.8rem, 10vw, 4rem); }
+      .hero-desc { font-size: 0.9rem; }
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .btn-primary { width: 100%; justify-content: center; }
+
+      #stats { grid-template-columns: repeat(2, 1fr); padding: 2rem 1.25rem; }
+      .stat-num { font-size: 2.5rem; }
+
+      #services { padding: 4rem 1.25rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .service-card { padding: 2rem 1.5rem; }
+
+      #whitening { padding: 4rem 1.25rem; gap: 2.5rem; }
+      .whitening-h2 { font-size: clamp(2rem, 8vw, 3rem); }
+
+      #trust { padding: 4rem 1.25rem; gap: 2.5rem; }
+      .trust-pillars { grid-template-columns: 1fr; }
+      .trust-badge { position: static; margin-top: 1.5rem; display: inline-block; }
+
+      #testimonials { padding: 4rem 1.25rem; }
+      .testimonials-h2 { font-size: clamp(2rem, 8vw, 3rem); }
+
+      #cta { padding: 4rem 1.25rem; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .cta-h2 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+
+      footer { padding: 2.5rem 1.25rem 1.5rem; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+
+      /* Hide custom cursor on touch devices */
+      .cursor-dot, .cursor-ring { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -1131,13 +1246,16 @@
   <!-- ════════════════════════════════ NAV ══════════════════════════════════ -->
   <nav id="nav">
     <a href="#" class="nav-logo">Élume<span>.</span></a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#whitening">Blanchiment</a></li>
-      <li><a href="#trust">À propos</a></li>
-      <li><a href="#testimonials">Avis</a></li>
-      <li><a href="#cta" class="nav-cta">Prendre RDV</a></li>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services" onclick="closeMenu()">Services</a></li>
+      <li><a href="#whitening" onclick="closeMenu()">Blanchiment</a></li>
+      <li><a href="#trust" onclick="closeMenu()">À propos</a></li>
+      <li><a href="#testimonials" onclick="closeMenu()">Avis</a></li>
+      <li><a href="#cta" class="nav-cta" onclick="closeMenu()">Prendre RDV</a></li>
     </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
   <!-- ════════════════════════════════ HERO ════════════════════════════════ -->
@@ -1607,6 +1725,18 @@
   </footer>
 
   <script>
+    // ── Mobile Menu ──
+    function toggleMenu() {
+      const menu = document.getElementById('navLinks');
+      const btn = document.getElementById('hamburger');
+      menu.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+    function closeMenu() {
+      document.getElementById('navLinks').classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+    }
+
     // ── Custom Cursor ──
     const dot = document.getElementById('cursorDot');
     const ring = document.getElementById('cursorRing');
