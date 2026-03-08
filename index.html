@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Élume Dental — Premium Dental Care</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold: #B89A6A;
+      --gold-light: #D4B98A;
+      --gold-pale: #F5EDD8;
+      --charcoal: #1C1917;
+      --charcoal-mid: #2C2926;
+      --warm-white: #FAFAF7;
+      --cream: #F7F3EC;
+      --text-muted: #7A736B;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    .serif { font-family: 'Cormorant Garamond', serif; }
+
+    h1, h2, h3 { font-family: 'Cormorant Garamond', serif; letter-spacing: -0.02em; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.5s ease, box-shadow 0.5s ease, padding 0.4s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(250, 250, 247, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 8px 32px rgba(0,0,0,0.05);
+      padding: 1rem 3rem;
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      text-decoration: none;
+      opacity: 0.75;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+    .nav-cta {
+      background: var(--charcoal);
+      color: var(--warm-white) !important;
+      opacity: 1 !important;
+      padding: 0.65rem 1.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.1em;
+      transition: background 0.25s ease, transform 0.2s ease !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--gold) !important;
+      transform: translateY(-1px);
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10rem 4rem 6rem 6rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: block;
+      width: 2.5rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-h1 {
+      font-size: clamp(3.5rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--charcoal);
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease 0.5s forwards;
+    }
+
+    .hero-h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      max-width: 400px;
+      margin-bottom: 3rem;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.7s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.9s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--charcoal);
+      color: var(--warm-white);
+      padding: 1rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(28, 25, 23, 0.2);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(184, 154, 106, 0.35);
+    }
+
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--charcoal);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s ease, gap 0.2s ease;
+    }
+
+    .btn-ghost:hover { opacity: 1; gap: 0.75rem; }
+
+    /* ─── HERO RIGHT (VIDEO) ─── */
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 120px;
+      background: linear-gradient(to right, var(--warm-white), transparent);
+      z-index: 2;
+    }
+
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      animation: fadeIn 1.2s ease 0.4s forwards;
+    }
+
+    .hero-video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(250,250,247,0.08) 0%, rgba(28,25,23,0.2) 100%);
+    }
+
+    /* Gold corner decoration */
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      bottom: 3rem;
+      right: 3rem;
+      width: 5rem;
+      height: 5rem;
+      border-bottom: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+      z-index: 3;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.4s forwards;
+    }
+
+    /* ─── SCROLL INDICATOR ─── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.5s forwards;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      writing-mode: vertical-rl;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 3rem;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollPulse 2s ease infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(0.7); }
+    }
+
+    /* ─── STATS BAR ─── */
+    #stats {
+      background: var(--charcoal);
+      padding: 3.5rem 6rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #stats::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+      border-right: 1px solid rgba(184, 154, 106, 0.15);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--warm-white);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 0.1rem;
+    }
+
+    .stat-suffix {
+      font-size: 2rem;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(250, 250, 247, 0.45);
+    }
+
+    /* ─── SECTION COMMON ─── */
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ─── SERVICES ─── */
+    #services {
+      padding: 8rem 6rem;
+      background: var(--warm-white);
+    }
+
+    .services-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+      align-items: end;
+    }
+
+    .services-h2 {
+      font-size: clamp(2.5rem, 3.5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--charcoal);
+    }
+
+    .services-h2 em { font-style: italic; color: var(--gold); }
+
+    .services-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      font-weight: 300;
+      max-width: 400px;
+      align-self: end;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--cream);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { transform: translateY(-4px); }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(184,154,106,0.04) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .service-card:hover::after { opacity: 1; }
+
+    .service-icon {
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: 2rem;
+      color: var(--gold);
+    }
+
+    .service-num {
+      position: absolute;
+      top: 2rem;
+      right: 2.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 300;
+      color: rgba(184, 154, 106, 0.1);
+      line-height: 1;
+      transition: color 0.4s ease;
+    }
+
+    .service-card:hover .service-num { color: rgba(184, 154, 106, 0.18); }
+
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .service-text {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-decoration: none;
+      transition: gap 0.2s ease;
+    }
+
+    .service-link:hover { gap: 0.75rem; }
+
+    /* ─── WHITENING FEATURE ─── */
+    #whitening {
+      background: var(--charcoal);
+      padding: 8rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #whitening::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(184, 154, 106, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .whitening-video-wrap {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(184, 154, 106, 0.2),
+        0 40px 80px rgba(0,0,0,0.5),
+        0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .whitening-video-wrap video {
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+    }
+
+    .whitening-video-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(184,154,106,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Gold corner accents */
+    .corner-tl, .corner-br {
+      position: absolute;
+      width: 2.5rem;
+      height: 2.5rem;
+      z-index: 2;
+    }
+
+    .corner-tl {
+      top: -12px; left: -12px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+    }
+
+    .corner-br {
+      bottom: -12px; right: -12px;
+      border-bottom: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+    }
+
+    .whitening-content .section-label { color: var(--gold-light); }
+    .whitening-content .section-label::before { background: var(--gold-light); }
+
+    .whitening-h2 {
+      font-size: clamp(2.5rem, 3.5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--warm-white);
+      margin-bottom: 1.5rem;
+    }
+
+    .whitening-h2 em { font-style: italic; color: var(--gold-light); }
+
+    .whitening-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: rgba(250, 250, 247, 0.55);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    .whitening-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .step-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold);
+      min-width: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .step-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(250, 250, 247, 0.65);
+      font-weight: 300;
+    }
+
+    /* ─── TRUST / ABOUT ─── */
+    #trust {
+      padding: 8rem 6rem;
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: center;
+    }
+
+    .trust-image-wrap {
+      position: relative;
+    }
+
+    .trust-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 2px;
+      filter: brightness(0.95) contrast(1.05);
+    }
+
+    .trust-badge {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      background: var(--charcoal);
+      color: var(--warm-white);
+      padding: 2rem;
+      border-radius: 2px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(28, 25, 23, 0.3);
+    }
+
+    .trust-badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      line-height: 1;
+      color: var(--gold-light);
+    }
+
+    .trust-badge-text {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      margin-top: 0.35rem;
+    }
+
+    .trust-h2 {
+      font-size: clamp(2.2rem, 3vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 1.5rem;
+    }
+
+    .trust-h2 em { font-style: italic; color: var(--gold); }
+
+    .trust-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    .trust-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .pillar {
+      padding: 1.5rem;
+      background: white;
+      border-radius: 2px;
+      border-left: 2px solid var(--gold);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .pillar:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+
+    .pillar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 0.4rem;
+    }
+
+    .pillar-text {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    #testimonials {
+      padding: 8rem 6rem;
+      background: var(--warm-white);
+      overflow: hidden;
+    }
+
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .testimonials-h2 {
+      font-size: clamp(2.5rem, 3.5vw, 4rem);
+      font-weight: 300;
+      color: var(--charcoal);
+      margin-top: 1rem;
+    }
+
+    .testimonials-h2 em { font-style: italic; color: var(--gold); }
+
+    .testimonials-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .testimonial-card {
+      background: var(--cream);
+      padding: 2.5rem;
+      border-radius: 2px;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem;
+      line-height: 1;
+      color: var(--gold);
+      opacity: 0.25;
+      position: absolute;
+      top: 1rem;
+      left: 1.5rem;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 0.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .star {
+      width: 14px; height: 14px;
+      fill: var(--gold);
+    }
+
+    .testimonial-text {
+      font-size: 0.92rem;
+      line-height: 1.8;
+      color: var(--charcoal);
+      font-weight: 300;
+      margin-bottom: 1.75rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--gold-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.2;
+    }
+
+    .author-detail {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    /* ─── CTA ─── */
+    #cta {
+      background: var(--charcoal);
+      padding: 8rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #cta::before {
+      content: '';
+      position: absolute;
+      bottom: -200px; left: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(184, 154, 106, 0.08) 0%, transparent 70%);
+    }
+
+    .cta-h2 {
+      font-size: clamp(2.5rem, 3.5vw, 4.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--warm-white);
+    }
+
+    .cta-h2 em { font-style: italic; color: var(--gold-light); }
+
+    .cta-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-field label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(250, 250, 247, 0.45);
+    }
+
+    .form-field input,
+    .form-field select {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(184, 154, 106, 0.2);
+      border-radius: 2px;
+      padding: 0.875rem 1rem;
+      color: var(--warm-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.25s ease, background 0.25s ease;
+      appearance: none;
+    }
+
+    .form-field input::placeholder { color: rgba(250, 250, 247, 0.25); }
+
+    .form-field input:focus,
+    .form-field select:focus {
+      border-color: var(--gold);
+      background: rgba(184, 154, 106, 0.05);
+    }
+
+    .form-field select option { background: var(--charcoal-mid); color: var(--warm-white); }
+
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      background: var(--gold);
+      color: var(--charcoal);
+      padding: 1.1rem 2.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.25s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 20px rgba(184, 154, 106, 0.3);
+    }
+
+    .form-submit:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(184, 154, 106, 0.4);
+    }
+
+    .form-submit:active { transform: translateY(0); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--charcoal-mid);
+      padding: 4rem 6rem 2.5rem;
+      border-top: 1px solid rgba(184, 154, 106, 0.1);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      line-height: 1.75;
+      color: rgba(250, 250, 247, 0.4);
+      font-weight: 300;
+      margin-top: 1rem;
+      max-width: 280px;
+    }
+
+    .footer-col-title {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .footer-links a {
+      font-size: 0.85rem;
+      color: rgba(250, 250, 247, 0.45);
+      text-decoration: none;
+      font-weight: 300;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover { color: var(--gold-light); }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(250, 250, 247, 0.25);
+      font-weight: 300;
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee-wrap {
+      background: var(--gold-pale);
+      padding: 1.5rem 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(184, 154, 106, 0.2);
+      border-bottom: 1px solid rgba(184, 154, 106, 0.2);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+      width: max-content;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 0 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      opacity: 0.65;
+    }
+
+    .marquee-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ─── CUSTOM CURSOR ─── */
+    .cursor-dot {
+      position: fixed;
+      width: 8px; height: 8px;
+      background: var(--gold);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(184, 154, 106, 0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    }
+
+    body:has(a:hover) .cursor-dot,
+    body:has(button:hover) .cursor-dot {
+      width: 12px; height: 12px;
+      background: var(--gold);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ════════════════════════════════ NAV ══════════════════════════════════ -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">Élume<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#whitening">Whitening</a></li>
+      <li><a href="#trust">About</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#cta" class="nav-cta">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- ════════════════════════════════ HERO ════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-left">
+      <p class="hero-label">Premium Dental Care</p>
+      <h1 class="hero-h1">
+        Your smile,<br/>
+        <em>perfectly</em><br/>
+        crafted.
+      </h1>
+      <p class="hero-desc">
+        Luxury dental care that combines cutting-edge technology with an uncompromising commitment to your comfort and confidence.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">
+          Book a Consultation
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#whitening" class="btn-ghost">
+          Watch Treatment
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-video-wrap">
+        <video autoplay muted loop playsinline>
+          <source src="Tooth_covered_by_whitening_gel_delpmaspu_.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-video-overlay"></div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ STATS ═══════════════════════════════ -->
+  <div id="stats">
+    <div class="stat-item reveal">
+      <div class="stat-num">
+        <span class="count" data-target="4800">0</span>
+        <span class="stat-suffix">+</span>
+      </div>
+      <p class="stat-label">Happy Patients</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-num">
+        <span class="count" data-target="15">0</span>
+        <span class="stat-suffix">yrs</span>
+      </div>
+      <p class="stat-label">Years of Excellence</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-num">
+        <span class="count" data-target="98">0</span>
+        <span class="stat-suffix">%</span>
+      </div>
+      <p class="stat-label">Satisfaction Rate</p>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-num">
+        <span class="count" data-target="12">0</span>
+        <span class="stat-suffix">+</span>
+      </div>
+      <p class="stat-label">Awards Received</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ MARQUEE ════════════════════════════════ -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <!-- repeated 2x for seamless loop -->
+      <span class="marquee-item"><span class="marquee-dot"></span>Teeth Whitening</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Dental Implants</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Invisalign</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Porcelain Veneers</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Smile Design</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Cosmetic Dentistry</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Preventive Care</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Orthodontics</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Teeth Whitening</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Dental Implants</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Invisalign</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Porcelain Veneers</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Smile Design</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Cosmetic Dentistry</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Preventive Care</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Orthodontics</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ SERVICES ══════════════════════════════ -->
+  <section id="services">
+    <div class="services-header">
+      <div>
+        <p class="section-label reveal">Our Services</p>
+        <h2 class="services-h2 reveal reveal-delay-1">
+          Every smile<br/>
+          tells a <em>story.</em>
+        </h2>
+      </div>
+      <p class="services-desc reveal reveal-delay-2">
+        From routine hygiene to full smile transformations, our expert team delivers exceptional care with results that speak for themselves.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <span class="service-num">01</span>
+        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M12 2C9.5 2 7 4 7 7c0 2 .5 3.5 1 5l1 4c.5 2 1.5 3 3 3s2.5-1 3-3l1-4c.5-1.5 1-3 1-5 0-3-2.5-5-5-5z"/>
+          <path d="M9 9h6M9 12h6"/>
+        </svg>
+        <h3 class="service-title">Teeth Whitening</h3>
+        <p class="service-text">Professional-grade whitening that delivers radiant, long-lasting results. Up to 8 shades brighter in a single session.</p>
+        <a href="#whitening" class="service-link">
+          Learn more
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-num">02</span>
+        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+        </svg>
+        <h3 class="service-title">Porcelain Veneers</h3>
+        <p class="service-text">Wafer-thin porcelain shells custom-crafted to give you a flawless, camera-ready smile that looks and feels natural.</p>
+        <a href="#cta" class="service-link">
+          Learn more
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-num">03</span>
+        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+        </svg>
+        <h3 class="service-title">Dental Implants</h3>
+        <p class="service-text">State-of-the-art titanium implants that restore your smile, bite, and confidence — designed to last a lifetime.</p>
+        <a href="#cta" class="service-link">
+          Learn more
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-1">
+        <span class="service-num">04</span>
+        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+        </svg>
+        <h3 class="service-title">Invisalign</h3>
+        <p class="service-text">Clear, comfortable aligners that straighten your teeth discreetly. No wires, no brackets, just a perfect smile.</p>
+        <a href="#cta" class="service-link">
+          Learn more
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-2">
+        <span class="service-num">05</span>
+        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+        </svg>
+        <h3 class="service-title">Smile Design</h3>
+        <p class="service-text">A complete aesthetic overhaul tailored to your face, personality, and goals. Your dream smile, brought to life.</p>
+        <a href="#cta" class="service-link">
+          Learn more
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="service-card reveal reveal-delay-3">
+        <span class="service-num">06</span>
+        <svg class="service-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        </svg>
+        <h3 class="service-title">Preventive Care</h3>
+        <p class="service-text">Comprehensive check-ups, professional cleaning, and digital X-rays to keep your smile healthy for life.</p>
+        <a href="#cta" class="service-link">
+          Learn more
+          <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ WHITENING FEATURE ═════════════════════════ -->
+  <section id="whitening">
+    <div class="whitening-video-wrap reveal-left">
+      <div class="corner-tl"></div>
+      <div class="corner-br"></div>
+      <video autoplay muted loop playsinline>
+        <source src="Tooth_covered_by_whitening_gel_delpmaspu_.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="whitening-content reveal-right">
+      <p class="section-label">Signature Treatment</p>
+      <h2 class="whitening-h2">
+        The art of<br/>
+        <em>radiant</em> white.
+      </h2>
+      <p class="whitening-desc">
+        Our signature whitening protocol uses pharmaceutical-grade gel technology, achieving dramatically brighter results with zero sensitivity. A treatment unlike any other.
+      </p>
+
+      <div class="whitening-steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <p class="step-text"><strong style="color:rgba(250,250,247,0.85)">Shade Assessment</strong> — We digitally map your current shade and set your target with precision imaging.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <p class="step-text"><strong style="color:rgba(250,250,247,0.85)">Gel Application</strong> — Professional-grade whitening gel is carefully applied for maximum coverage and comfort.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <p class="step-text"><strong style="color:rgba(250,250,247,0.85)">Light Activation</strong> — Our LED activator accelerates the whitening process for visible results in 60 minutes.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <p class="step-text"><strong style="color:rgba(250,250,247,0.85)">Reveal & Protect</strong> — We finalize with a fluoride sealant to protect and prolong your new radiant smile.</p>
+        </div>
+      </div>
+
+      <a href="#cta" class="btn-primary" style="align-self:flex-start;">
+        Book Whitening Session
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ TRUST ════════════════════════════════ -->
+  <section id="trust">
+    <div class="trust-image-wrap reveal-left">
+      <img
+        src="https://placehold.co/600x750/2C2926/B89A6A?text=Dr.+Élume+Team"
+        alt="Our dental team"
+        class="trust-image"
+      />
+      <div class="trust-badge">
+        <div class="trust-badge-num">A+</div>
+        <p class="trust-badge-text">Patient Rating</p>
+      </div>
+    </div>
+
+    <div class="reveal-right" style="padding-bottom: 2rem;">
+      <p class="section-label">About Us</p>
+      <h2 class="trust-h2">
+        Precision, artistry,<br/>
+        and <em>genuine care.</em>
+      </h2>
+      <p class="trust-desc">
+        At Élume Dental, we believe exceptional dentistry is both science and art. Our team of specialists brings decades of combined expertise — and an unwavering dedication to your wellbeing — to every single appointment.
+      </p>
+
+      <div class="trust-pillars">
+        <div class="pillar">
+          <p class="pillar-title">Advanced Technology</p>
+          <p class="pillar-text">3D imaging, laser dentistry, and AI-assisted diagnostics for unmatched precision.</p>
+        </div>
+        <div class="pillar">
+          <p class="pillar-title">Certified Specialists</p>
+          <p class="pillar-text">Board-certified practitioners with continuous education in the latest techniques.</p>
+        </div>
+        <div class="pillar">
+          <p class="pillar-title">Comfort-First Approach</p>
+          <p class="pillar-text">Anxiety-free environment, sedation options, and a team that truly listens.</p>
+        </div>
+        <div class="pillar">
+          <p class="pillar-title">Transparent Pricing</p>
+          <p class="pillar-text">Clear treatment plans and flexible payment options with no hidden fees.</p>
+        </div>
+      </div>
+
+      <a href="#cta" class="btn-primary" style="display:inline-flex;">
+        Meet Our Team
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════ TESTIMONIALS ═════════════════════════════ -->
+  <section id="testimonials">
+    <div class="testimonials-header reveal">
+      <p class="section-label" style="justify-content:center;">Patient Stories</p>
+      <h2 class="testimonials-h2">
+        Smiles that <em>speak</em><br/>for themselves.
+      </h2>
+    </div>
+
+    <div class="testimonials-track">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars">
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        </div>
+        <p class="testimonial-text">"I was terrified of the dentist for years. The team at Élume completely changed that. My veneers look so natural — I can't stop smiling. Worth every penny."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div>
+            <p class="author-name">Sophia M.</p>
+            <p class="author-detail">Porcelain Veneers Patient</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars">
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        </div>
+        <p class="testimonial-text">"The whitening results blew me away. I did the session before my wedding and could not have been happier. The whole process was painless and the staff made me feel so at ease."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">J</div>
+          <div>
+            <p class="author-name">James R.</p>
+            <p class="author-detail">Whitening Patient</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal reveal-delay-3">
+        <div class="testimonial-stars">
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+          <svg class="star" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>
+        </div>
+        <p class="testimonial-text">"My implants feel completely natural. Eighteen months on and I genuinely forget they're implants. The precision and care that went into each step of the process was extraordinary."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <p class="author-name">Amelia K.</p>
+            <p class="author-detail">Dental Implant Patient</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ CTA ════════════════════════════════ -->
+  <section id="cta">
+    <div class="reveal-left">
+      <p class="section-label" style="color:rgba(184,154,106,0.8);">Book a Visit</p>
+      <h2 class="cta-h2">
+        Ready for your<br/>
+        <em>best</em> smile?
+      </h2>
+      <p style="font-size:0.9rem;line-height:1.8;color:rgba(250,250,247,0.45);font-weight:300;margin-top:1.5rem;max-width:360px;">
+        Take the first step toward the smile you deserve. Our team will reach out within 24 hours to confirm your appointment.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:1rem;margin-top:3rem;">
+        <div style="display:flex;align-items:center;gap:1rem;color:rgba(250,250,247,0.55);font-size:0.88rem;font-weight:300;">
+          <svg width="18" height="18" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 13.18 19.79 19.79 0 01.12 4.59a2 2 0 012-2.18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.29 6.29l1.42-1.42a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          +1 (555) 234-5678
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;color:rgba(250,250,247,0.55);font-size:0.88rem;font-weight:300;">
+          <svg width="18" height="18" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello@elumedental.com
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;color:rgba(250,250,247,0.55);font-size:0.88rem;font-weight:300;">
+          <svg width="18" height="18" fill="none" stroke="var(--gold)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          128 Fifth Avenue, New York, NY 10011
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal-right">
+      <form class="cta-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-field">
+            <label>First Name</label>
+            <input type="text" placeholder="Jane" />
+          </div>
+          <div class="form-field">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" />
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Email Address</label>
+          <input type="email" placeholder="jane@example.com" />
+        </div>
+        <div class="form-field">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+1 (555) 000-0000" />
+        </div>
+        <div class="form-field">
+          <label>Service of Interest</label>
+          <select>
+            <option value="" disabled selected>Select a service…</option>
+            <option>Teeth Whitening</option>
+            <option>Porcelain Veneers</option>
+            <option>Dental Implants</option>
+            <option>Invisalign</option>
+            <option>Smile Design</option>
+            <option>Preventive Care</option>
+            <option>General Consultation</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">
+          Request Appointment
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">Élume<span>.</span></a>
+        <p>Premium dental care where science meets artistry. Creating beautiful, healthy smiles since 2009.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Services</p>
+        <ul class="footer-links">
+          <li><a href="#">Teeth Whitening</a></li>
+          <li><a href="#">Porcelain Veneers</a></li>
+          <li><a href="#">Dental Implants</a></li>
+          <li><a href="#">Invisalign</a></li>
+          <li><a href="#">Smile Design</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Practice</p>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Team</a></li>
+          <li><a href="#">Technology</a></li>
+          <li><a href="#">Patient Stories</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="#">128 Fifth Avenue</a></li>
+          <li><a href="#">New York, NY 10011</a></li>
+          <li><a href="#">+1 (555) 234-5678</a></li>
+          <li><a href="#">hello@elumedental.com</a></li>
+          <li><a href="#">Mon–Sat: 8am – 7pm</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Élume Dental. All rights reserved.</p>
+      <p>Privacy Policy · Terms of Service</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Custom Cursor ──
+    const dot = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    let ringX = 0, ringY = 0, dotX = 0, dotY = 0;
+
+    document.addEventListener('mousemove', e => {
+      dotX = e.clientX; dotY = e.clientY;
+      dot.style.left = dotX + 'px';
+      dot.style.top = dotY + 'px';
+    });
+
+    function animateRing() {
+      ringX += (dotX - ringX) * 0.12;
+      ringY += (dotY - ringY) * 0.12;
+      ring.style.left = ringX + 'px';
+      ring.style.top = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // ── Sticky Nav ──
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Scroll Reveal ──
+    const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => observer.observe(el));
+
+    // ── Counter Animation ──
+    const counters = document.querySelectorAll('.count');
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const duration = 2000;
+        const start = performance.now();
+        function step(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease out cubic
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target);
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => counterObserver.observe(c));
+  </script>
+</body>
+</html>
